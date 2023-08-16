@@ -80,6 +80,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     private BorderedText borderedText;
 
+    private void playBeepSound() {
+    ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_ALARM, 100); 
+    toneGenerator.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
+    toneGenerator.release();
+    }
+    
     @Override
     public void onPreviewSizeChosen(final Size size, final int rotation) {
         final float textSizePx =
@@ -274,6 +280,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                                 result.setLocation(location);
                                 mappedRecognitions.add(result);
+                                playBeepSound();
                             }
                         }
 
